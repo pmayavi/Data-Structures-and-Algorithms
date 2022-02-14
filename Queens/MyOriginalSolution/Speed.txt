@@ -1,0 +1,1 @@
+Takes 3-1 second with 12 Queens
