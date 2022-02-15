@@ -1,28 +1,26 @@
+from sys import stdin, stdout
 from itertools import combinations
 # Code by Pablo Maya Villegas
 # 14 February 2022
 
-# Opens a file named input.txt and starts a cicle for the number of sets
+# Reads the first line and starts a cicle for the number of sets
 def Start():
-    file = open("input.txt", "r")
-    n = int(file.readline())
+    n = int(stdin.readline().strip())
     on = n + 1
     string = ""
 
     while n > 0:
-        combs = Set(file)
+        combs = Set()
         string = Save(string, on - n, combs)
         n -= 1
 
     # Writes a txt file with the correct combinations
-    f = open("output.txt", "w")
-    f.write(string)
-    f.close()
+    stdout.write(string)
 
 # The code for a single set, it gets the 3 inicial values and
 # two lists of the possible combinations and the prohibited combinations
-def Set(file):
-    ins = file.readline().split(" ")
+def Set():
+    ins = stdin.readline().strip().split(" ")
     t = int(ins[0])
     p = int(ins[1])
     s = int(ins[2])
@@ -30,12 +28,12 @@ def Set(file):
     start = []
     prohibited = []
     while t > 0:
-        start.append(file.readline()[:-1].upper())
+        start.append(stdin.readline()[:-1].upper())
         t -= 1
     start.sort()                     # Sorts the list alphabetically
     start.sort(key=len, reverse=True)# Sorts the list by size, longest is first
     while p > 0:
-        p1 = file.readline()[:-1].upper()
+        p1 = stdin.readline().strip().upper()
         p2 = p1.split(" ")
         p2.sort()
         p2.sort(key=len, reverse=True)
@@ -43,6 +41,7 @@ def Set(file):
         p -= 1
     prohibited.sort()
     prohibited.sort(key=len, reverse=True)
+
 
     return Combinations(start, prohibited, s)
 
