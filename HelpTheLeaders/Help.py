@@ -8,6 +8,7 @@ def Start():
     on = n + 1
     string = ''
 
+    # Loop that works for every set
     while n > 0:
         string += 'Set ' + str(on - n) + ':\n'
         string += Set()
@@ -16,9 +17,9 @@ def Start():
     stdout.write(string)
 
     # Code to print to a txt file the output for easy uDebug testing
-    #f = open("output.txt", "w")
-    #f.write(string)
-    #f.close()
+    f = open("output.txt", "w")
+    f.write(string)
+    f.close()
     
 # The code to read a single set, it gets the 3 inicial values and
 # two lists of the starter topics and the prohibited combinations
@@ -30,22 +31,21 @@ def Set():
 
     start = []
     prohibited = []
+
+    # Reads the starter topics and stores them in an array
     while t > 0:
         start.append(stdin.readline().strip().upper())# Removes the \n character and upper cases it
         t -= 1
     start.sort()                     # Sorts the list alphabetically
     start.sort(key=len, reverse=True)# Sorts the list by size, longest is first
     
+    # Reads the prohibited combinations and stores them in an array
     while p > 0:
-        p1 = stdin.readline().strip().upper()
-        p2 = p1.split(" ")
-        p2.sort()
-        p2.sort(key=len, reverse=True)
-        prohibited.append(' '.join(p2))
+        temp = stdin.readline().strip().upper().split()
+        temp.sort()
+        temp.sort(key=len, reverse=True)
+        prohibited.append(' '.join(temp))
         p -= 1
-    prohibited.sort()
-    prohibited.sort(key=len, reverse=True)
-
 
     t = len(start)
     x = 0
@@ -59,6 +59,12 @@ def Set():
 
 
 # Recursive class
+# A = Backtraking array, starting value is [-1] * s (s = 3 then [-1,-1,-1])
+# x = Current position of the start array
+# s = Number of desired topics in a combination
+# t = Number of elements in the start array
+# start = The starter topics array
+# prohibited = The prohibited combinations
 def Recursion(A, x, s, t, i, start, prohibited):
     if A[i] == -1 and x < t:
         A[i] = start[x] # Places the topic in the combination
@@ -87,9 +93,11 @@ def Valid(A, s, prohibited):
     for p in prohibited:
         if p == A:
             return ''
+        # If s is >= 3 then there could be a prohibited pair with another word in the middle
         elif s >= 3:
-            z = p.split(" ")
-            if (z[0] + " ") in (A + " ") and (z[1] + " ") in (A + " "):
+            z = p.split()
+            # If both elements of the prohibited list are in the combination, it's discarded
+            if (z[0] + " ") in (A + " ") and (z[1] + " ") in (A + " "): 
                 return ''
     return A + '\n' # It's valid
 
