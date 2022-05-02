@@ -67,7 +67,7 @@ def validate(sudoku, sy, sx, y, x, n):
     for i in range(sy):
         for j in range(sx):
             if n == sudoku[y0 + i][x0 + j] and (y0 + i != y or x0 + j != x):
-                error(y, x, y0 + j, x0 + i)
+                error(y, x, x0 + i, y0 + j)
                 return False
 
     return True
