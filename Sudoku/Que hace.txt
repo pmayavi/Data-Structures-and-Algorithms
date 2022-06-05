@@ -1,0 +1,9 @@
+
+
+El codigo es capaz de solucionar un sudoku 36x36 en 8 segundos 
+Crear uno nuevo incompleto de solucion unica de 36x36 en un minuto
+Los sudoku que crea son de solucion unica como se debia hacer
+Puede crear un sudoku de 400x400 solucionado desde nada y se demora 2 segundos
+Esta adaptado para funcionar con cualquier sudoku nxm
+Todo lo mencionado anteriormente funciona para 15x20 por ejemplo
+Pero no importo para la competencia porque eran sudokus unicamente de 3x3 con mas de una solucion
