@@ -8,7 +8,7 @@ public class Sudoku
     private Random rand;
     private bool morethantwo;
 
-
+    //This is the constructor of the code
     public Sudoku()
     {
         morethantwo = false;
@@ -16,7 +16,7 @@ public class Sudoku
         mat = new int[1, 1];
         rand = new Random();
     }
-
+    //This reads the file with the sudoku tu solve
     public void read(string filedir)
     {
         string text = System.IO.File.ReadAllText(filedir + ".txt");
@@ -64,7 +64,7 @@ public class Sudoku
             count++;
         }
     }
-
+    //It creates a organized sudoku with a simple pattern
     public void newBoard(int SY, int SX)
     {
         sy = SY;
@@ -133,7 +133,7 @@ public class Sudoku
             }
         }
     }
-
+    //It is used to validate a number of the sudoku
     bool validate(int y, int x, int n)
     {
         for (int num = 0; num < syx; num++)
@@ -156,7 +156,7 @@ public class Sudoku
         }
         return true;
     }
-
+    //If it has a 0, this will fill it with numbers
     public int marker()
     {
         if (morethantwo)
@@ -185,7 +185,7 @@ public class Sudoku
         }
         return singles();
     }
-
+    //It checks what number must go there obligatorily
     int singles()
     {
         if (morethantwo)
@@ -218,7 +218,7 @@ public class Sudoku
         }
         return doubles(0);
     }
-
+    //It priorizes the spaces that has a little number of posible combinations
     int doubles(int y0)
     {
         if (morethantwo)
@@ -251,7 +251,7 @@ public class Sudoku
         }
         return solve(0);
     }
-
+    //It tries all the posibles combinations
     int solve(int y0)
     {
         if (morethantwo)
@@ -319,7 +319,7 @@ public class Sudoku
         }
         return removed;
     }
-
+    
     void undo(List<int[]> removed)
     {
         foreach (int[] z in removed)
@@ -327,7 +327,7 @@ public class Sudoku
             sudoku[z[0], z[1]].Add(z[2]);
         }
     }
-
+    //Steps to randomize the sudoku
     public void randomize()
     {
         numbers();
@@ -337,7 +337,7 @@ public class Sudoku
         cols2();
     }
 
-
+    //Change the place with other numbers
     void numbers()
     {
         for (int n = 1; n < syx; n++)
@@ -355,7 +355,7 @@ public class Sudoku
             }
         }
     }
-
+    //An auxiliar
     void swapRows(int n1, int n2)
     {
         for (int i = 0; i < syx; i++)
@@ -365,7 +365,7 @@ public class Sudoku
             sudoku[n2, i][0] = row;
         }
     }
-
+    //An auxiliar
     void swapCols(int n1, int n2)
     {
         for (int i = 0; i < syx; i++)
@@ -375,7 +375,7 @@ public class Sudoku
             sudoku[i, n2][0] = row;
         }
     }
-
+    //Change the rows inside the quadrants
     void rows()
     {
         for (int n = 0; n < syx; n++)
@@ -386,7 +386,7 @@ public class Sudoku
         }
     }
 
-
+    //Change the columns inside the quadrants
     void cols()
     {
         for (int n = 0; n < syx; n++)
@@ -397,7 +397,7 @@ public class Sudoku
         }
     }
 
-
+    //Change the quandrants like rows
     void rows2()
     {
         for (int n = 0; n < sy; n++)
@@ -409,7 +409,7 @@ public class Sudoku
             }
         }
     }
-
+    //Change the quardants like columns
     void cols2()
     {
         for (int n = 0; n < sx; n++)
@@ -422,7 +422,7 @@ public class Sudoku
             }
         }
     }
-
+    //Tries to eliminate a random number and confirms that there's only one solution
     public void removeNumbers()
     {
         int[] items = Enumerable.Range(0, syx * syx).ToArray();
@@ -452,7 +452,7 @@ public class Sudoku
         }
         watch.Stop();
     }
-
+    //Changes the matrix with the solved sudoku to the sudoku's format
     public void matrixToSudoku()
     {
         sudoku = new List<int>[syx, syx];
@@ -465,7 +465,7 @@ public class Sudoku
             }
         }
     }
-
+    //Saves the solved sudoku in a matrix
     public void saveSudoku()
     {
         mat = new int[syx, syx];
@@ -477,7 +477,7 @@ public class Sudoku
             }
         }
     }
-
+    //Prints the sudoku
     public void printSudoku()
     {
         int log = syx.ToString().Length;
@@ -503,7 +503,7 @@ public class Sudoku
         //Console.Write(s);
         File.WriteAllText("output.txt", s);
     }
-
+    //revisa que todo esté correcto
     public bool validateSudoku()
     {
         for (int y = 0; y < syx; y++)
